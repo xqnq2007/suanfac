@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "suanfati", "suanfati\suanfa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "time", "time\time.vcxproj", "{96E56ED3-0A8B-488E-A872-373BDD048462}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duisort", "duisort\duisort.vcxproj", "{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +23,10 @@ Global
 		{96E56ED3-0A8B-488E-A872-373BDD048462}.Debug|Win32.Build.0 = Debug|Win32
 		{96E56ED3-0A8B-488E-A872-373BDD048462}.Release|Win32.ActiveCfg = Release|Win32
 		{96E56ED3-0A8B-488E-A872-373BDD048462}.Release|Win32.Build.0 = Release|Win32
+		{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}.Debug|Win32.Build.0 = Debug|Win32
+		{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}.Release|Win32.ActiveCfg = Release|Win32
+		{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

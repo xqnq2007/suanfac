@@ -25,6 +25,8 @@ int banlancedcoin(){
 	return b+1;
 	
 }
+
+
 int rand6(){
 	int a = ~(1 << 31);	
 	while (a > 12){
