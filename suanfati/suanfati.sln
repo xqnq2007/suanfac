@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "time", "time\time.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duisort", "duisort\duisort.vcxproj", "{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "charusort", "charusort\charusort.vcxproj", "{DA6E2577-AACA-438A-A08E-81943311F09B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,10 @@ Global
 		{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}.Debug|Win32.Build.0 = Debug|Win32
 		{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}.Release|Win32.ActiveCfg = Release|Win32
 		{8DA47C28-A067-4DD3-BD81-26BF8BBC8BC8}.Release|Win32.Build.0 = Release|Win32
+		{DA6E2577-AACA-438A-A08E-81943311F09B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DA6E2577-AACA-438A-A08E-81943311F09B}.Debug|Win32.Build.0 = Debug|Win32
+		{DA6E2577-AACA-438A-A08E-81943311F09B}.Release|Win32.ActiveCfg = Release|Win32
+		{DA6E2577-AACA-438A-A08E-81943311F09B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
