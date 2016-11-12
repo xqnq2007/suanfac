@@ -27,6 +27,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "binarytree", "binarytree\bi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "threadtree", "threadtree\threadtree.vcxproj", "{0355DC57-88F6-42B3-BD75-9932E27AF0A3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "huffmantree", "huffmantree\huffmantree.vcxproj", "{BC895878-3F8A-4981-A63E-4DE43DD87496}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "graph", "graph\graph.vcxproj", "{4915F46B-11DE-4B87-89EE-F64EC238A266}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -81,6 +85,14 @@ Global
 		{0355DC57-88F6-42B3-BD75-9932E27AF0A3}.Debug|Win32.Build.0 = Debug|Win32
 		{0355DC57-88F6-42B3-BD75-9932E27AF0A3}.Release|Win32.ActiveCfg = Release|Win32
 		{0355DC57-88F6-42B3-BD75-9932E27AF0A3}.Release|Win32.Build.0 = Release|Win32
+		{BC895878-3F8A-4981-A63E-4DE43DD87496}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BC895878-3F8A-4981-A63E-4DE43DD87496}.Debug|Win32.Build.0 = Debug|Win32
+		{BC895878-3F8A-4981-A63E-4DE43DD87496}.Release|Win32.ActiveCfg = Release|Win32
+		{BC895878-3F8A-4981-A63E-4DE43DD87496}.Release|Win32.Build.0 = Release|Win32
+		{4915F46B-11DE-4B87-89EE-F64EC238A266}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4915F46B-11DE-4B87-89EE-F64EC238A266}.Debug|Win32.Build.0 = Debug|Win32
+		{4915F46B-11DE-4B87-89EE-F64EC238A266}.Release|Win32.ActiveCfg = Release|Win32
+		{4915F46B-11DE-4B87-89EE-F64EC238A266}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
