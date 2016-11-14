@@ -14,7 +14,14 @@ typedef struct treenode{
 	int linkNodeNum;
 }minTreeNode;
 minTreeNode* buidMinTree(graph* g){
-	minTreeNode minTree[vertexnum];
+	minTreeNode* minTree=(minTreeNode*)malloc(sizeof(minTreeNode)*vertexnum);	
+	for (int vi = 0; vi < vertexnum; vi++){
+		minTree[vi].linkNodeNum = 0;
+		minTree[vi].vertex = vi;
+		for (int vj = 0; vj < vertexnum; vj++){
+			minTree[vi].linkNode[vj] = 0;			
+		}
+	}	
 	int minTreeNodeNum = 0;
 	int u[vertexnum] = {0,1,2,3,4};
 	int v[vertexnum];
@@ -26,36 +33,65 @@ minTreeNode* buidMinTree(graph* g){
 	uhead = (uhead + 1) % vertexnum;
 	usize--;	
 	v[vtail] = tmp;
-	utail = (utail + 1) % vertexnum;
-	vsize++;
-	for (int i = 0; i < vertexnum; i++){
-		minTree[i].vertex = i;
-	}
+	vtail = (vtail + 1) % vertexnum;
+	vsize++;	
 	while (vsize <= 5){
-		printf("第%d \n次",vsize);
+		/*printf("第%d次 \n",vsize);
+		printf("V中所有值:\n");
+		int tmpvhead = vhead;
+		for (int i = 0; i < vsize; i++){
+			printf("%d \n", v[tmpvhead]);
+			tmpvhead = (tmpvhead + 1) % vertexnum;
+		}
+		printf("U中所有值:\n");
+		int tmpuhead = uhead;
+		for (int i = 0; i < usize; i++){
+			printf("%d \n", u[tmpuhead]);
+			tmpuhead = (tmpuhead + 1) % vertexnum;
+		}*/
 		int minWeight = 100;
 		int minvvertex, minuvertex;
 		minvvertex = minuvertex = 0;
+		int tvhead = vhead;		
 		for (int i = 0; i < vsize; i++){
-			for (int j = 0; j < usize; j++){
-				int vvertex = v[vhead];
-				int uvertex = u[uhead];
-				uhead = (uhead + 1) % vertexnum; 
-				vhead = (vhead + 1) % vertexnum;
-				if (g->edge[vvertex][uvertex] < minWeight){
+			int vvertex = v[tvhead];
+			int tuhead = uhead;
+			for (int j = 0; j < usize; j++){				
+				int uvertex = u[tuhead];
+				tuhead = (tuhead + 1) % vertexnum; 		
+				//printf("vvertex:%d uvertex:%d 当前循环边权值：%d\n", vvertex, uvertex,g->edge[vvertex][uvertex]);
+				if (g->edge[vvertex][uvertex] < minWeight&&g->edge[vvertex][uvertex]!=0){
 					minvvertex = vvertex;
 					minuvertex = uvertex;
 					minWeight = g->edge[vvertex][uvertex];
 				}
 			}
+			tvhead = (tvhead + 1) % vertexnum;
 		}
-		minTree[minvvertex].linkNode[minTree[minvvertex].linkNodeNum++] = minuvertex;		
+		//printf("minvvertex:%d minuvertex:%d minWeight:%d\n", minvvertex, minuvertex, minWeight);
+		//printf("minvvertex:%d linkNodeNum:%d \n", minvvertex, minTree[minvvertex].linkNodeNum);
+		if (minWeight!=100)
+			minTree[minvvertex].linkNode[minTree[minvvertex].linkNodeNum++] = minuvertex;
+		//printf("结点%d 添加结点%d \n", minvvertex, minuvertex);		
 		v[vtail] = minuvertex;
 		vtail = (vtail + 1) % vertexnum;
 		vsize++;
-		uhead = (uhead + 1) % vertexnum;
+		int curu = 0;
+		for (int m = uhead; m != utail; m = (m + 1) % vertexnum){
+			if (u[m] == minuvertex)
+				curu = m;
+		}		
+		if (curu == uhead){
+			uhead = (uhead + 1) % vertexnum;
+		}
+		else {
+			for (int n = curu; n != uhead; n = (n - 1 + vertexnum) % vertexnum){
+				u[n] = u[(n - 1 + vertexnum) % vertexnum];
+			}	
+			uhead = (uhead + 1) % vertexnum;
+		}
 		usize--;
-	}
+	}	
 	return minTree;
 }
 void BFST(graph* g){
@@ -107,6 +143,18 @@ void displaygraph(graph* g){
 		printf("第%d个结点是否遍历%d\n", i + 1, g->istranverse[i]);
 	}
 }
+void displaymintree(minTreeNode m[]){
+	for (int i = 0; i < vertexnum; i++){
+		printf("第%d个结点\n", i+1);
+		printf("vertex:%d\n", m[i].vertex);
+		printf("minTree[%d].linkNode:\n",i);
+		for (int j = 0; j < m[i].linkNodeNum; j++){
+			printf("%d ", m[i].linkNode[j]);
+		}
+		printf("\n");
+		printf("minTree[%d].linkNodeNum:%d\n",i, m[i].linkNodeNum);		
+	}
+}
 void main(){
 	graph* g = (graph*)malloc(sizeof(graph));
 	g->graphtype = 0;
@@ -132,8 +180,7 @@ void main(){
 	g->edge[4][3] = 2;
 	//DFST(g);
 	minTreeNode* mintree;
-	mintree = buidMinTree(g);
-
-	//displaygraph(g);
+	mintree = buidMinTree(g);	
+	displaymintree(mintree);	
 	system("PAUSE");
 }
