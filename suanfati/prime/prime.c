@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
+#include "string.h"
 #define vertexnum 5
 #define edgenum 6
 typedef struct node{
@@ -155,6 +156,121 @@ void displaymintree(minTreeNode m[]){
 		printf("minTree[%d].linkNodeNum:%d\n",i, m[i].linkNodeNum);		
 	}
 }
+char* reversestr(char* p){
+	int len = strlen(p);
+	char *result = (char*)malloc(len);
+	for (int i = 0; i < len; i++)
+		*(result + i) = *(p + len - 1 - i);
+	*(result + len) = '\0';
+	return result;
+}
+char* join2(char* str1, char* str2){
+	char* result = (char*)malloc(strlen(str1) + strlen(str2) + 1);
+	if (result == NULL){
+		printf("合并字符串失败\n");
+		return NULL;
+	}
+	strcpy(result, str1);
+	strcat(result, str2);
+	return result;
+}
+int intToStr(int m, char* str){
+	int i = 0;
+	int j = 1;
+	int k = 0;
+	char c;
+	if (m < 0)
+		str[i++] = '-';
+	m = m>0 ? m : -m;
+	do{
+		str[i] = '0' + m % 10;
+		m = m / 10;
+		i++;
+	} while (m > 0);
+	if (str[0] == '-')
+		j = 1;
+	else
+		j = 0;
+	k = i - 1;
+	while (j < k){
+		c = str[j];
+		str[j] = str[k];
+		str[k] = c;
+		j++;
+		k--;
+	}
+	str[i] = '\0';
+	return i - 1;
+}
+void minRoute(graph* g, int* weight, int* route,int* final){	
+	int v0;
+	printf("请输入：\n");
+	scanf("%d",&v0);
+	//printf("v0：%d\n",v0);
+	int tmpw;
+	for (int i = 0; i < vertexnum; i++){
+		//printf("g->edge[0][0]:%d", g->edge[0][0]);
+		tmpw = g->edge[v0][i];
+		//printf("tmpw：%d\n", tmpw);
+		if (tmpw>0)
+			weight[i] = tmpw;
+		else
+			weight[i] = 1000;
+		//printf("weight:%d", weight[i]);
+		route[i] = v0;
+		final[i] = 0;
+	}
+	weight[v0] = 0;	
+	printf("\n");
+	final[v0] = 1;	
+	for (int i = 1; i < vertexnum; i++){
+		int index = 0;
+		int minw = 1000;
+		for (int j = 0; j < vertexnum; j++){
+			tmpw = weight[j];
+			printf("weight[j]:%d\n", weight[j]);
+			if (tmpw<minw && final[j] == 0){
+				minw = tmpw;
+				index = j;
+			}			
+		}
+		printf("minw:%d index:%d\n",minw,index);		
+		final[index] = 1;
+		for (int k = 0; k < vertexnum; k++){			
+			if (g->edge[index][k]>0 && ((minw + g->edge[index][k])<weight[k]) && final[k] == 0){
+				weight[k] = minw + g->edge[index][k];
+				route[k] = index;
+				printf("weight[k]:%d route[k]:%d\n", weight[k], route[k]);
+			}
+		}
+	}	
+	for (int i = 0; i < vertexnum; i++){
+		if (i != v0){
+			printf("到第%d个结点的最短路径值为：%d\n", i, weight[i]);
+			printf("到第%d个结点的最短路径为：\n", i);
+			int tmpv = i;
+			char* tmp = "";			
+			while (tmpv != v0){
+				printf("%d->", tmpv);
+				char* tmp1 = "";
+				tmp = join2(tmp,intToStr(tmpv,tmp1));
+				tmpv = route[tmpv];
+			}
+			printf("v0\n",v0);
+			char* tmp2 = "";
+			tmp = join2(tmp, intToStr(v0, tmp2));
+			tmp = reversestr(tmp);
+			printf("%s\n", tmp);
+		}		
+	}
+}
+void testarr(int* a){
+	for (int i = 0; i < 5; i++){
+		a[i] = i+9;
+		printf("%d->", a[i]);
+	}
+	//printf("%d->", a);
+}
 void main(){
 	graph* g = (graph*)malloc(sizeof(graph));
 	g->graphtype = 0;
@@ -179,8 +295,17 @@ void main(){
 	g->edge[3][4] = 2;
 	g->edge[4][3] = 2;
 	//DFST(g);
-	minTreeNode* mintree;
-	mintree = buidMinTree(g);	
-	displaymintree(mintree);	
+	//minTreeNode* mintree;
+	//mintree = buidMinTree(g);	
+	//displaymintree(mintree);	
+	//int weight[vertexnum],route[vertexnum],final[vertexnum];
+	int* weight = (int*)malloc(sizeof(int)*vertexnum);
+	int* route = (int*)malloc(sizeof(int)*vertexnum);
+	int* final = (int*)malloc(sizeof(int)*vertexnum);
+	minRoute(g, weight, route, final);
+	//printf("g->edge[0][0]:5%d", g->edge[0][0]);
+	//int a[5];
+	//int* a = (int*)malloc(sizeof(int)*vertexnum);
+	//testarr(a);
 	system("PAUSE");
 }
